@@ -1,0 +1,94 @@
+Timings of 09-09-2025 (Tue, only for Day 1)
+    10:00 am - 12:04pm
+    12:19 pm - 1:15pm
+    1 hour time - break (5 / 10 minutes)
+    2:15 pm or 2:25pm
+    2:15/25PM - 5:45pm
+Timing from 10-10-2025 (Wed)
+    08:30 am - 10:15 pm (1hr 45 min)
+    15 mins - break 
+    10:30 am - 12:15 pm (1hr 45 min)
+    1 hour - lunch     
+    1:15 pm - 2:45 pm (1 hr 30 min)
+    15 mins - break 
+    3:00 pm - 4:30 pm (1 hr 30 min)
+
+1. Python Basics 
+Data types: (primitive)
+    int 
+    float 
+    str 
+    bool: True / False 
+Variable: Identifier, which holds the data 
+
+name = 'Mahesh'
+age = 46
+salary = 4000.50
+is_active = True 
+
+2. Derived Data 
+single name -> many names 
+single employee -> many employees 
+    list 
+    object of the class 
+    tuple 
+    dict 
+    set / frozenset 
+names = ['Mahesh', 'Vaishnavi', 'Banu']
+employees = [Employee('Mahesh', 46, 4000.50, True), Employee('Vaishnavi', 21, 40000.75,True),
+        Employee('Banu', 22, 50000, True)]
+
+employees = [('Mahesh', 46, 4000.50, True), ('Vaishnavi', 21, 40000.75,True),
+        ('Banu', 22, 50000, True)]
+employees = [{'name':'Mahesh', 'age':46, 'salary':4000.50, 'is_active':True}, 
+            {'name':'Vaishnavi', 'age':21, 'salary': 40000.75, 'is_active':True},
+            {'name':'Banu', 'age':22, 'salary': 50000, 'is_active':True}
+            
+Memory Layout:
+    heap 
+        ref1 [Mahesh]
+        ref2 [46]
+        ref3 [4000.50]
+        ref4 [True]
+        ref5 ['Mahesh']['Vaishnavi']['Banu']        : index = 0,1,2,....
+        ....
+        ref6 [ref7][ref8->ref10][ref9]
+        ref7 ['Mahesh'][46][4000.50][True]          : index = 0, 1,2,....
+        ref8 #Vaishnavi elements 
+        ref9 #Banu elements 
+        ref10 ['Vaishnavi'][21][60000.75][True] 
+    stack 
+        name [ref1]
+        age [ref2]
+        salary [ref3]
+        is_active [ref4]
+        names [ref5]
+        employees [ref6]
+print(names[1], employees[1][1])
+
+    fun_change_vaishnavi(vaishnavi):
+        name, age, salary, is_active = vaishnavi #tuple 
+        salary += 20000
+        return (name, age, salary, is_active)
+    employees[1] = fun_change_vaishnavi(employees[1])
+
+
+--------
+
+1. Python 
+2. Git 
+3. variables and primitive types vs derived types 
+
+tuple, object, dictinary - to represent data like record like employee, product, flight etc 
+
+list - to represent multiple data or records ie array of records 
+
+app of array as the database and menu driven programming 
+    - employee management 
+    - tuple as employee 
+
+Next: 
+    dictionary as employee 
+    object as employee 
+
+    - persistent store : to save in file (binary file | json | csv) / database like sqlite etc 
