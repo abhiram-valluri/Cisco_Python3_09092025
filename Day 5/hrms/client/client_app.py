@@ -1,12 +1,6 @@
-'''
-    employee management application
-'''
-import repo_sql_dict as repo
+import client.repo as repo
 
 def menu():
-    '''
-        menu option for employee management application
-    '''
     message = '''
 Options are:
 1 - Create Employee
@@ -18,64 +12,62 @@ Options are:
 Your Option:'''
     choice = int(input(message))
     if choice == 1:
-        emp_id = int(input('ID:'))
+        id = int(input('ID:'))
         name = input('Name:')
         age = int(input('Age:'))
         salary = float(input('Salary:'))
-        is_active = input('Active(y/n):').upper() == 'Y'
-        employee = {'id':emp_id, 'name':name, 'age':age,
-                    'salary':salary, 'is_active':is_active}
-        try:
-            repo.create_employee(employee)
-            print('Employee Created Successfully.')
-        except repo.EmployeeAlreadyExistError as ex:
-            print(f"{ex}")
-        except repo.DatabaseError as ex:
-            print(f"{ex}")
+        is_active = (input('Active(y/n):').upper() == 'Y')
 
+        employee = {'id':id, 'name':name, 'age':age, 
+                    'salary':salary, 'is_active':is_active}
+
+        createdEmp = repo.create_employee(employee)
+        print(f'Created:{createdEmp}')
+        print('Employee Created Successfully.')
     elif choice == 2:
         print('List of Employees:')
         for employee in repo.read_all_employee():
             print(employee)
     elif choice == 3:
-        emp_id = int(input('ID:'))
-        employee = repo.read_by_id(emp_id)
-        if employee is None:
+        id = int(input('ID:'))
+        employee = repo.read_by_id(id)
+        if employee == None:
             print('Employee not found.')
         else:
             print(employee)
     elif choice == 4:
-        emp_id = int(input('ID:'))
-        employee = repo.read_by_id(emp_id)
-        if employee is None:
+        id = int(input('ID:'))
+        employee = repo.read_by_id(id)
+        if employee == None: 
             print('Employee Not Found')
         else:
             print(employee)
             salary = float(input('New Salary:'))
-            new_employee = {'id':employee['id'],
+            new_employee = {'id':employee['id'], 
                 'name':employee['name'], 
                 'age':employee['age'], 
                 'salary':salary, 
                 'is_active':employee['is_active']}
-            repo.update(emp_id, new_employee)
+            updatedEmp = repo.update(id, new_employee)
+            print(f'Updated:{updatedEmp}')
             print('Employee updated successfully.')
     elif choice == 5:
-        emp_id = int(input('ID:'))
-        employee = repo.read_by_id(emp_id)
-        if employee is None:
+        id = int(input('ID:'))
+        employee = repo.read_by_id(id)
+        if employee == None: 
             print('Employee Not Found')
         else:
-            repo.delete_employee(emp_id)
-            print('Employee Deleted Succesfully.')
-    elif choice == 6:
+            messageDict = repo.delete_employee(id)
+            #print('Employee Deleted Succesfully.')
+            print(messageDict['message'])
+    elif choice == 6: 
         print('Thank you for using Application')
-    return choice
+
+    return choice 
 
 def menus():
-    '''
-        menus for employee app sql dict rich
-    '''
     choice = menu()
     while choice != 6:
         choice = menu()
+    
 menus()
